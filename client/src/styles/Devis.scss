@@ -1,0 +1,202 @@
+.devis-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.devis-head-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 40px 0;
+  color: black;
+  text-align: center;
+}
+
+.devis-header-img {
+  width: 40%;
+  max-width: 400px;
+}
+
+.devis-title {
+  font-size: 2.5rem;
+  color: #8b36bc;
+  margin-bottom: 10px;
+}
+
+.devis-subtitle {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.devis-description {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.devis-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #8b36bc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.devis-button:hover {
+  background-color: #521f6f;
+}
+
+.devis-form-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.devis-translator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: black;
+}
+
+.devis-trad-img {
+  width: 20%;
+  max-width: 100px;
+  border-radius: 50%;
+}
+
+.devis-language-selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.devis-select-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.devis-select {
+  padding: 10px;
+  border-radius: 5px;
+  width: 15dvw;
+  border: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .devis-select {
+    padding: 10px;
+    border-radius: 5px;
+    width: 30dvw;
+    border: 1px solid #ddd;
+  }
+}
+
+.devis-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.devis-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.devis-form-row input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.devis-form-row input:focus {
+  border-color: #8b36bc;
+  outline: none;
+}
+
+.devis-language-selection p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.devis-select-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.devis-select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.devis-select:focus {
+  border-color: #8b36bc;
+  outline: none;
+}
+
+.devis-form-file-import {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.devis-form-file-import:focus {
+  border-color: #8b36bc;
+  outline: none;
+}
+
+.devis-form-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #8b36bc;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.devis-form-button:hover {
+  background-color: #521f6f;
+}
+
+.devis-select-container img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}

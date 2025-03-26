@@ -1,0 +1,98 @@
+.register-container {
+  height: 69vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f4f4; // Light grey background for contrast
+}
+
+.register-form {
+  width: 80vw;
+  padding: 2rem;
+  background-color: #ffffff; // White background for form
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.register-title {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.input-field {
+  width: 100%;
+  height: 2.5rem;
+  font-size: 1rem;
+  background-color: #f9f9f9; // Light background for inputs
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.input-field::placeholder {
+  color: #888;
+}
+
+.role-label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 14px;
+  color: #555;
+}
+
+.role-select {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.submit-button {
+  background-color: #8338ec;
+  color: white;
+  width: 100%;
+  height: 3rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #6a00ff;
+}
+
+.input-containers {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem; /* Add unit for gap */
+  width: 100%;
+}
+
+.input-containers > div {
+  flex: 1; /* Allow both divs to take up equal space */
+  max-width: 48%; /* Ensure the divs don’t exceed half of the container width */
+}
+
+@media (max-width: 768px) {
+  .input-containers {
+    flex-direction: column; /* Stack inputs vertically on small screens */
+    gap: 1rem;
+  }
+
+  .register-form {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .input-containers > div {
+    max-width: 100%; /* Ensure full-width fields on mobile */
+  }
+}

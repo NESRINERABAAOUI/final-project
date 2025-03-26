@@ -1,0 +1,86 @@
+.table-container {
+  color: black;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+}
+
+h1 {
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table thead {
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  font-weight: 600;
+}
+
+table th,
+table td {
+  padding: 1rem;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #4a4a4a;
+  color: #ffffff;
+  text-align: left;
+  font-size: 1rem;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f4f4f4;
+}
+
+table tbody tr:hover {
+  background-color: #e8e8e8;
+}
+
+tfoot {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+tfoot button {
+  margin: 0 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+tfoot button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  table th,
+  table td {
+    padding: 0.75rem;
+  }
+
+  ftoot button {
+    padding: 0.5rem 1rem;
+  }
+}

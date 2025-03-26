@@ -1,0 +1,33 @@
+https://filetransfer.io/data-package/LpCX36kP#link
+
+
+This is an interlacing command line script I wrote. I would like it integrated into the lenticular project
+I currently have it running from command line. An example python3 /var/www/html/design/interlace_lenticular.py -d /var/www/html/design/lenticular_frames -o /var/www/html/design/lenticular_interlaced/output_interlaced.png --lpi 51.5  --dpi 1200 --width 3.9 --units inches
+Want to include this in output options as well. It currently grabs all frame image files from a specified folder. We acn call it through a php script if need be but I want it to output progress feedback as it processes. The processing time can take several minutes depending on resolution and size of output
+So for the project PitchPerfect: Currently, lenticular image processing and printing is laborious and requires a skilled operator for both file prep and printin lens alignment
+For an individual lenticular lens, a pitch test is required to determine true LPI (lines per inch). Once this measurement is made, a series of frames is then interlaced into one print-ready image that contains "slices" of each frame
+I will be using UV flatbed printers where the interlaced image is reversed and then printed on the back of the lenticular lens
+
+The printer operator currently needs to align the lenticular lens with pre-printed registration marks on the printer bed before the print job can start. This can be time consuming and can be subject to operator error
+I propose using an overhead camera to capture a still high res image of the lenticular lens and its location and orientation relative to the printer's 0,0 axis.
+Lenticular lenses we will be using will vary from 10- 100 LPI we will need to take multiple samples of the captured image to determine lines per inch (to the nearest 100th if not 1000th of an inch)
+The lens will sit on the printer bed (vacuum table keeps in in place) while the lpi is calculated as well its orientation
+
+Registration marks should be in all four corners o f the captured image to determine scale and identify any skewing between the camera angle and the printer bed
+So, the frames will be the functional output of the Lenticular Project (we can generate downloadable interlaced images for users that want to input their own LPI and lens dimensions for their own lenticular creation).  Those frame outputs combined with PitchPerfect's data (LPI and pitch test calculation, lens orientation on bed) and then generate a print ready interlaced image for that specific job. Interlaced image file and printer setting will be sent the the printer's job queue.
+
+So basically, I want the print operator to be able to place a lenticular lens on the vacuum bed and capture an overhead photo. Everything is processed and the job is sent to the printer. All the operator has to do is press "print"
+I have some technical workflow suggestions, but want to acquaint you with the project first
+It will require some trial and error to get this right. I am also not sure what tolerance we will be able to measure up to
+
+yes, my initial thought is to have the printer print precisely 1 inch registration marks directly on the the printer bed. These will be used for both X,Y reference, scale, and to detect any skewing
+I am open to other methods and also, I have not completed my research
+
+There are 2 "complex" parts to this project that we will need to be solved. They are 1. Calculate pitch test LPI for intended viewer distance adn 2. Aligning lens and interlacing the image so that a "frame reset" does not occur in the center of the final lenticular
+
+
+I think web based with python backend. This will be a solution for print shops that want to print lenticulars and for our own fulfillment process
+We will need an API, webhook or something similar to communicate with the camera and the printer
+So, what do you think?
+
+yes,high res web cam will be used. I imagine the camera will be mounted several feet above the print bed facing down

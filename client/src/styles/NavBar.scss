@@ -1,0 +1,242 @@
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #fff;
+  position: relative;
+}
+
+.nav-logo {
+  width: 150px;
+  z-index: 10;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  position: relative;
+  z-index: 5;
+
+  .burgerMenu {
+    display: none; // Initially hidden for larger screens
+    background-color: transparent;
+    border: none;
+
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  li {
+    list-style: none;
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hidden {
+    display: none;
+  }
+}
+
+.visible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone-menu-logo {
+  width: 10rem;
+  margin-bottom: 1rem;
+  display: none; // Initially hidden
+}
+
+// 📌 DROPDOWN MENU DESIGN
+.nav-auth {
+  position: relative;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: linear-gradient(135deg, #8338ec, #521f6f);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition:
+    background 0.3s,
+    transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  &:hover {
+    background: linear-gradient(135deg, #6c1d8c, #3d1257);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 180px;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0.3s;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 12px 15px;
+  text-align: left;
+  transition: background 0.3s ease;
+  gap: 10px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.icon-dashboard::before {
+  content: "📊";
+}
+
+.icon-logout::before {
+  content: "🚪";
+}
+
+// 📌 RESPONSIVE DESIGN FOR MOBILE
+@media (max-width: 768px) {
+  .nav-logo {
+    display: none;
+  }
+
+  nav {
+    flex-direction: column;
+
+    .burgerMenu {
+      display: flex; // Show burger menu on small screens
+    }
+
+    .menu {
+      flex-direction: column;
+      background-color: white;
+      position: absolute;
+      right: 0;
+      top: 4rem;
+      width: 100%;
+      height: calc(100vh - 4rem);
+      align-items: center;
+      padding: 1rem;
+
+      li {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .phone-menu-logo {
+      display: block; // Show logo in burger menu
+    }
+  }
+
+  .dropdown-menu {
+    width: 150px;
+  }
+
+  .dropdown-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+// 🔥 AUTH BUTTON STYLING
+.nav-auth-btn {
+  background-color: #8338ec;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
+
+  &:hover {
+    background-color: #6c1d8c;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    background-color: #521f6f;
+    transform: scale(0.95);
+  }
+}
+
+@media (min-width: 769px) {
+  .menu {
+    flex-direction: row;
+
+    li {
+      margin: 0 1rem;
+    }
+  }
+
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .burgerMenu {
+    display: none;
+  }
+}

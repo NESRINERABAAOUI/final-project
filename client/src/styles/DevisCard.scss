@@ -1,0 +1,19 @@
+.devisCard-container {
+  background-color: rgb(236, 235, 235);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  max-width: 40dvw;
+  color: black;
+  border: 1px solid transparent;
+  min-width: 40dvw;
+  height: 500px;
+}
+
+.devisCard-container:hover {
+  border: 1px solid #8b36bc;
+  cursor: pointer;
+  background-color: rgb(167, 167, 167);
+}

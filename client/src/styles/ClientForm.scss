@@ -1,0 +1,72 @@
+.client-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    color: #333;
+    text-align: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #8338ec;
+      outline: none;
+    }
+  }
+
+  button {
+    width: 100%;
+    background-color: #8338ec;
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease;
+    text-align: center;
+
+    &:hover {
+      background-color: #6c1d8c;
+    }
+
+    &:disabled {
+      background-color: #bbb;
+      cursor: not-allowed;
+    }
+  }
+
+  .error {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+}

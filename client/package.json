@@ -1,0 +1,51 @@
+{
+  "name": "@harmonia/client",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@reduxjs/toolkit": "^2.5.1",
+    "@table-library/react-table-library": "^4.1.7",
+    "aos": "^2.3.4",
+    "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
+    "mammoth": "^1.9.0",
+    "pdf-lib": "^1.17.1",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^4.10.38",
+    "pptxgenjs": "^3.12.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
+    "react-pdf": "^9.2.1",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.23.0",
+    "react-table": "^7.8.0",
+    "react-toastify": "^10.0.5",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^6.1.15",
+    "swiper": "^11.1.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "prettier": "^3.2.5",
+    "sass-embedded": "^1.77.8",
+    "vite": "^5.2.11"
+  },
+  "lint-staged": {
+    "*.{html,scss,css}": "prettier --check",
+    "*.{jsx,js}": "eslint --report-unused-disable-directives"
+  }
+}

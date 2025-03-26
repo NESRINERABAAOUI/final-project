@@ -1,0 +1,178 @@
+import axios from 'axios';
+import React, { useEffect, useState,useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MyContext } from "../../App";
+
+const extractPayload = (token) => {
+  if(token==null)return null;
+  const parts = token.split('.');
+  const payload = JSON.parse(atob(parts[1]));
+  return payload;
+}
+
+const Create = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    category: "",
+
+    duration: "",
+    plans: [{ days: "", startTime: "" }],
+    user:{}
+  });
+
+  const [errors, setErrors] = useState([]);
+  const nav = useNavigate();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handlePlanChange = (index, key, value) => {
+    const updatedPlans = [...formData.plans];
+    updatedPlans[index][key] = value;
+    setFormData({ ...formData, plans: updatedPlans });
+  };
+
+  const addPlan = () => {
+    setFormData({ ...formData, plans: [...formData.plans, { days: "", startTime: "" }] });
+  };
+  const token = useContext(MyContext);
+  console.log(token);
+  const user=extractPayload(token);
+  console.log("==============>",user);
+  const {userId}=user;
+  console.log("==============>",userId);
+
+if(userId){
+  useEffect(() => {
+
+  
+    axios
+      .get("http://localhost:8080/user/"+userId)
+      .then((res) => {
+        console.log("cars List-------------", res.data);
+     
+      })
+      .catch((error) => console.log(error));
+  }, []);}
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: formData.name,
+      category: formData.category,
+      duration: formData.duration,
+      plansServ: formData.plans,
+      user:user
+
+    };
+    console.log(data);
+
+    // const data =new FormData() ;
+    // data.append("name",formData.name)
+    // data.append("category",formData.category)
+    // data.append("duration",formData.duration)
+    // data.append("plansServ",formData.plans)
+    // data.append("user",user)
+    axios
+      .post("http://localhost:8080/services/add", data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log("gghghghghhghghghgh");
+        nav(`/services/${res.data.id}`);
+      })
+      .catch((err) => {
+        console.log("====>", err);
+        // const errorResponse = err.response.data.errors;
+        // const errorArr = [];
+        // for (const key of Object.keys(errorResponse)) {
+        //   errorArr.push(errorResponse[key].message);
+        // }
+        // setErrors(errorArr);
+      });
+  };
+
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <form onSubmit={submitHandler} className='w-96'>
+        {errors.map((err, index) => (
+          <p style={{ color: "red" }} key={index}>
+            {err}
+          </p>
+        ))}
+        {/* <div>
+          <label>Name:</label>
+          <input type='text' name="name" onChange={handleInputChange} value={formData.name} />
+        </div> */}
+        <div class="mb-10 relative h-11 w-full min-w-[200px]">
+          <input placeholder="Name"
+            onChange={handleInputChange} value={formData.name}
+            type="text"
+            name="name"
+            class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" />
+          <label
+            class="after:content[''] pointer-events-none absolute left-0  -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-1.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+            Name
+          </label>
+        </div>
+        <div>
+          <label>Category :</label>
+          <select class="mb-10 peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" name="category" onChange={handleInputChange} value={formData.category}>
+            <option value="Art & Music">Art & Music</option>
+            <option value="Coding">Coding</option>
+            <option value="Finance">Finance</option>
+            <option value="It & Software">It & Software</option>
+            <option value="Language">Language</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Teaching & Academic">Teaching & Academic</option>
+          </select>
+        </div>
+        {/* <div>
+          <label>Duration:</label>
+          <input type='number' name="duration" onChange={handleInputChange} value={formData.duration} />
+        </div> */}
+        <div class="mb-10 relative h-11 w-full min-w-[200px]">
+          <input placeholder="Name"
+            onChange={handleInputChange} value={formData.duration}
+            type="number"
+            name="duration"
+            class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100" />
+          <label
+            class="after:content[''] pointer-events-none absolute left-0  -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-1.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+            Duration
+          </label>
+        </div>
+
+        <button className=" mb-10 w-1/4 flex items-center justify-center h-12 bg-blue-400 py-2 px-4 transition-all duration-300 rounded hover:text-white hover:bg-indigo-400" type="button" onClick={addPlan}>
+          Add Plan
+        </button>
+        <div class="mb-10 relative h-11 w-full min-w-[200px]">
+          
+          {formData.plans.map((plan, index) => (
+            <div key={index} className='flex gap-3'>
+              <input class="mb-10 peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100"
+                type='date'
+                onChange={(e) => handlePlanChange(index, 'days', e.target.value)}
+                value={plan.days}
+              />
+              <input class="mb-12 peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100"
+                type='time'
+                onChange={(e) => handlePlanChange(index, 'startTime', e.target.value)}
+                value={plan.startTime}
+              />
+              <label class="after:content[''] pointer-events-none absolute left-0  -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-1.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">Plans</label>
+            </div>
+          ))}
+          <button className="mt-10 w-full flex items-center justify-center h-12 bg-blue-400 py-2 px-4 transition-all duration-300 rounded hover:text-white hover:bg-indigo-400">ADD Service</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Create;

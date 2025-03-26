@@ -1,0 +1,19 @@
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 1%;
+  border: 2px dashed black;
+}
+
+.card-container:hover {
+  cursor: pointer;
+  background-color: #8b36bc;
+}
+
+.card-img {
+  width: 200px;
+  height: 250px;
+}
