@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { getClients, getTranslators } from "../services/usersData";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import "./GeneralInfo.css";
+import { getClients, getTranslators } from "../services/usersData";
 import { getAlldocumentsByUser } from "../services/documents";
+import "./GeneralInfo.css";
 
-const GeneralInfo = () => {
+function GeneralInfo() {
   const { token } = useSelector((state) => state.auth);
   const [clientsNumber, setClientsNumber] = useState(0);
-  const [TranslatorsNumber, setTranslatorsNumber] = useState(0);
+  const [translatorsNumber, setTranslatorsNumber] = useState(0);
   const [completedTariffs, setCompletedTariffs] = useState(0);
   const [pendingDocs, setPendingDocs] = useState(0);
   const [completedDocs, setCompletedDocs] = useState(0);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -21,71 +23,70 @@ const GeneralInfo = () => {
             getAlldocumentsByUser("completed", token),
             getAlldocumentsByUser("pending", token),
           ]);
+
         setClientsNumber(clients.length);
         setTranslatorsNumber(translators.length);
-        const total = completedDocs.reduce(
-          (accu, currentValue) => accu + currentValue.Price,
+
+        const totalTariffs = completedDocs.reduce(
+          (sum, doc) => sum + (doc.Price || 0),
           0
         );
-        setCompletedTariffs(total);
+
+        setCompletedTariffs(totalTariffs);
         setPendingDocs(pendingDocs.length);
         setCompletedDocs(completedDocs.length);
-      } catch (e) {}
+      } catch (error) {
+        console.error("Erreur lors du chargement des données :", error);
+      } finally {
+        setLoading(false);
+      }
     }
+
     fetchData();
-  }, []);
+  }, [token]);
+
+  if (loading) {
+    return <p className="loading">Chargement des données...</p>;
+  }
+
   return (
     <div>
-      <p className="paragraphe">Users & Tariffs</p>
+      <p className="paragraphe">Utilisateurs & Tarifs</p>
       <div className="cards">
-        <div className="card">
-          <div className="title">
-            <p className="title-text">Clients</p>
-          </div>
-          <div className="data">
-            <p>{clientsNumber}</p>
-          </div>
-        </div>
-        <div className="card">
-          <div className="title">
-            <p className="title-text">Translators</p>
-          </div>
-          <div className="data">
-            <p>{TranslatorsNumber}</p>
-          </div>
-        </div>
-        <div className="card">
-          <div className="title">
-            <p className="title-text">Completed Tariffs</p>
-          </div>
-          <div className="data">
-            <p>{completedTariffs}</p>
-          </div>
-        </div>
+        <InfoCard title="Clients" value={clientsNumber} />
+        <InfoCard title="Traducteurs" value={translatorsNumber} />
+        <InfoCard
+          title="Tarifs complétés"
+          value={completedTariffs.toLocaleString("fr-FR", {
+            style: "currency",
+            currency: "EUR",
+          })}
+        />
       </div>
+
       <div style={{ marginTop: "20px" }}>
         <p className="paragraphe">Documents</p>
         <div className="cards">
-          <div className="card">
-            <div className="title">
-              <p className="title-text">Pending Documents</p>
-            </div>
-            <div className="data">
-              <p>{pendingDocs}</p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="title">
-              <p className="title-text">Completed Documents</p>
-            </div>
-            <div className="data">
-              <p>{completedDocs}</p>
-            </div>
-          </div>
+          <InfoCard title="Documents en attente" value={pendingDocs} />
+          <InfoCard title="Documents complétés" value={completedDocs} />
         </div>
       </div>
     </div>
   );
-};
+}
+
+// Petit composant réutilisable pour les cartes
+function InfoCard({ title, value }) {
+  return (
+    <div className="card">
+      <div className="title">
+        <p className="title-text">{title}</p>
+      </div>
+      <div className="data">
+        <p>{value}</p>
+      </div>
+    </div>
+  );
+}
 
 export default GeneralInfo;

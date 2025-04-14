@@ -7,13 +7,13 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import authentication controllers
-const { login, signup } = require("../../controllers/authControllers");
+const { login, signup,validateRequest,signupValidator } = require("../../controllers/authControllers");
 
 // Route to get a specific item by ID
 router.post("/login", login);
 
 // Route to add a new item
-router.post("/signup", signup);
+router.post("/signup",signupValidator,validateRequest, signup);
 
 /* ************************************************************************* */
 

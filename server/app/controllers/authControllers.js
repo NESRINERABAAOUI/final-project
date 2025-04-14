@@ -2,6 +2,9 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const tables = require("../../database/tables"); // Adjust the path as necessary
+const { body, validationResult } = require("express-validator");
+
+const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
 const jwtSecretKey = process.env.JWT_SECRET_TOKEN;
 const jwtRefreshSecretKey = process.env.JWT_REFRESH_SECRET_TOKEN;
@@ -48,6 +51,56 @@ const authorizeRoles =
     }
     return next();
   };
+
+const signupValidator = [
+  body("Email").isEmail().withMessage("Invalid email address."),
+
+  body("Password")
+    .matches(strongPasswordRegex)
+    .withMessage(
+      "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."
+    ),
+
+  body("Role")
+    .isIn(["client", "translator", "admin"])
+    .withMessage("Role must be either client, translator, or admin."),
+
+  body("FirstName")
+    .notEmpty()
+    .isLength({ min: 4 })
+    .withMessage("First name is required. at least 6 characters long"),
+
+  body("LastName")
+    .notEmpty()
+    .isLength({ min: 3 })
+    .withMessage("Last name is required. at least 6 characters long"),
+
+  body("NumberPhone")
+    .matches(/^[0-9+\-().\s]{6,20}$/)
+    .withMessage("Invalid phone number."),
+
+  body("LanguageToTranslate")
+    .if(body("Role").equals("translator"))
+    .notEmpty()
+    .withMessage("LanguageToTranslate is required for translators."),
+
+  body("MotherLanguage")
+    .if(body("Role").equals("translator"))
+    .notEmpty()
+    .withMessage("MotherLanguage is required for translators."),
+];
+
+const validateRequest = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      message: "Validation failed",
+      errors: errors.array(),
+    });
+  }
+  next();
+};
 
 // Login Controller
 const login = async (req, res) => {
@@ -216,4 +269,6 @@ module.exports = {
   login,
   signup,
   refreshAccessToken,
+  validateRequest,
+  signupValidator,
 };

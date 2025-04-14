@@ -8,7 +8,6 @@ CREATE TABLE Users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (Id_User)
 );
-
 -- Document Types Table
 CREATE TABLE Document_Types (
     Id_Type INT NOT NULL AUTO_INCREMENT,
@@ -18,7 +17,6 @@ CREATE TABLE Document_Types (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (Id_Type)
 );
-
 -- Languages Table
 CREATE TABLE Languages (
     Id_Language INT NOT NULL AUTO_INCREMENT,
@@ -28,13 +26,12 @@ CREATE TABLE Languages (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (Id_Language)
 );
-
 -- Administrators Table
 CREATE TABLE Administrators (
     Id_Admin INT NOT NULL AUTO_INCREMENT,
     Id_User INT NOT NULL,
-    FirstName VARCHAR(255) NOT NULL,
-    LastName VARCHAR(255) NOT NULL,
+    FirstName VARCHAR(32) NOT NULL,
+    LastName VARCHAR(32) NOT NULL,
     NumberPhone VARCHAR(10) NULL,
     ImagePath VARCHAR(255) DEFAULT "1742373918346-.png",
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -42,13 +39,12 @@ CREATE TABLE Administrators (
     PRIMARY KEY (Id_Admin),
     FOREIGN KEY (Id_User) REFERENCES Users(Id_User)
 );
-
 -- Clients Table
 CREATE TABLE Clients (
     Id_Client INT NOT NULL AUTO_INCREMENT,
     Id_User INT NOT NULL,
-    FirstName VARCHAR(255) NOT NULL,
-    LastName VARCHAR(255) NOT NULL,
+    FirstName VARCHAR(32) NOT NULL,
+    LastName VARCHAR(32) NOT NULL,
     NumberPhone VARCHAR(10) NULL,
     ImagePath VARCHAR(255) DEFAULT "1742373918346-.png",
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -56,13 +52,12 @@ CREATE TABLE Clients (
     PRIMARY KEY (Id_Client),
     FOREIGN KEY (Id_User) REFERENCES Users(Id_User)
 );
-
 -- Translators Table
 CREATE TABLE Translators (
     Id_Translator INT NOT NULL AUTO_INCREMENT,
     Id_User INT NOT NULL,
-    FirstName VARCHAR(255) NOT NULL,
-    LastName VARCHAR(255) NOT NULL,
+    FirstName VARCHAR(32) NOT NULL,
+    LastName VARCHAR(32) NOT NULL,
     NumberPhone VARCHAR(10) NULL,
     ImagePath VARCHAR(255) DEFAULT "1742373918346-.png",
     MotherLanguage INT NOT NULL, -- Added maternal language
@@ -74,7 +69,6 @@ CREATE TABLE Translators (
     FOREIGN KEY (MotherLanguage) REFERENCES Languages(Id_Language),
     FOREIGN KEY (LanguageToTranslate) REFERENCES Languages(Id_Language)
 );
-
 -- Model Documents Table
 CREATE TABLE Model_Docs (
     Id_Doc INT NOT NULL AUTO_INCREMENT,
@@ -98,7 +92,6 @@ CREATE TABLE Model_Docs (
     FOREIGN KEY (LanguageToTranslate) REFERENCES Languages(Id_Language),
     PRIMARY KEY (Id_Doc)
 );
-
 -- Translator Tariffs Table
 CREATE TABLE Translator_Tariffs (
     Id_Tariff INT NOT NULL AUTO_INCREMENT,

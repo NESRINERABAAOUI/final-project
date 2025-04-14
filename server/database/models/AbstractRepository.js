@@ -1,6 +1,5 @@
 // Import database client
 const database = require("../client");
-
 // Define allowed table names for safety
 const allowedTables = [
   "Users",
@@ -21,7 +20,6 @@ class AbstractRepository {
         "Abstract class 'AbstractRepository' cannot be instantiated directly"
       );
     }
-
     // Validate table name
     if (!allowedTables.includes(table)) {
       throw new Error(`Invalid table name: ${table}`);
@@ -30,7 +28,7 @@ class AbstractRepository {
     this.table = table;
     this.database = database;
   }
-
+  
   /**
    * Create a new record in the table
    * @param {Object} data - Key-value pairs of column names and values

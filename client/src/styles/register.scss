@@ -1,98 +1,214 @@
+// Modern color palette
+$primary-color: #8338ec;
+$secondary-color: #6a00ff;
+$background-color: #f8f9fa;
+$text-color: #333;
+$input-background: #ffffff;
+$input-border: #e0e0e0;
+$input-focus-border: #8338ec;
+$error-color: #ff4757;
+
+// Modern font
+$font-family: 'Inter', sans-serif;
+
 .register-container {
-  height: 69vh;
+  min-height: 100vh; // Full viewport height
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f4f4f4; // Light grey background for contrast
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef); // Gradient background
+  padding: 2rem;
+  font-family: $font-family;
 }
 
 .register-form {
-  width: 80vw;
-  padding: 2rem;
-  background-color: #ffffff; // White background for form
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh; // Limit height for better scrolling
+  padding: 2.5rem;
+  background-color: $input-background;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; // Enable vertical scrolling
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .register-title {
-  color: #333;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
+  color: $text-color;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 .input-field {
   width: 100%;
-  height: 2.5rem;
+  height: 3rem;
   font-size: 1rem;
-  background-color: #f9f9f9; // Light background for inputs
-  color: #333;
-  border: 1px solid #ddd;
+  background-color: $input-background;
+  color: $text-color;
+  border: 1px solid $input-border;
   border-radius: 8px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   padding: 0 1rem;
-}
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-.input-field::placeholder {
-  color: #888;
+  &:focus {
+    border-color: $input-focus-border;
+    box-shadow: 0 0 0 3px rgba($input-focus-border, 0.1);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #888;
+  }
 }
 
 .role-label {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 14px;
-  color: #555;
+  color: $text-color;
 }
 
 .role-select {
   margin-top: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
+  border: 1px solid $input-border;
+  background-color: $input-background;
+  font-size: 1rem;
+  color: $text-color;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  appearance: none; // Remove default arrow
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 12px;
+
+  &:focus {
+    border-color: $input-focus-border;
+    box-shadow: 0 0 0 3px rgba($input-focus-border, 0.1);
+    outline: none;
+  }
 }
 
 .submit-button {
-  background-color: #8338ec;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
   color: white;
   width: 100%;
-  height: 3rem;
+  height: 3.5rem;
   border-radius: 8px;
   border: none;
   font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-.submit-button:hover {
-  background-color: #6a00ff;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba($primary-color, 0.3);
+  }
 }
 
 .input-containers {
   display: flex;
   justify-content: space-between;
-  gap: 2rem; /* Add unit for gap */
+  gap: 2rem;
   width: 100%;
 }
 
 .input-containers > div {
-  flex: 1; /* Allow both divs to take up equal space */
-  max-width: 48%; /* Ensure the divs don’t exceed half of the container width */
+  flex: 1;
+  max-width: 48%;
+}
+
+.password-validation {
+  margin-top: 10px;
+  p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: $text-color;
+  }
+}
+
+.error-text {
+  color: $error-color;
+  font-size: 0.875rem;
+  margin-top: -0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .register-form {
+    width: 80%;
+    padding: 2rem;
+  }
+
+  .input-containers {
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
   .input-containers {
-    flex-direction: column; /* Stack inputs vertically on small screens */
+    flex-direction: column;
     gap: 1rem;
   }
 
-  .register-form {
-    width: 90%;
-    padding: 1.5rem;
+  .input-containers > div {
+    max-width: 100%;
   }
 
-  .input-containers > div {
-    max-width: 100%; /* Ensure full-width fields on mobile */
+  .register-form {
+    width: 100%;
+    padding: 1.5rem;
+    max-height: 90vh;
+  }
+
+  .register-title {
+    font-size: 1.75rem;
+  }
+
+  .submit-button {
+    height: 3rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-form {
+    padding: 1rem;
+  }
+
+  .register-title {
+    font-size: 1.5rem;
+  }
+
+  .input-field {
+    height: 2.75rem;
+    font-size: 0.9rem;
+  }
+
+  .role-select {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .submit-button {
+    height: 2.75rem;
+    font-size: 1rem;
   }
 }

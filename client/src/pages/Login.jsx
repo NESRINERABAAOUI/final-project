@@ -10,11 +10,11 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // tab3ath des actions lel store de Redux
 
   // Get auth state from Redux
-  const { status, error } = useSelector((state) => state.auth);
-
+  const { status, error } = useSelector((state) => state.auth); // extraire les données de la store Redux
+  console.log("status en login", status);
   const onSubmit = async (e) => {
     e.preventDefault();
 
